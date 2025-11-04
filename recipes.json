@@ -1,0 +1,969 @@
+[
+    {
+        "id": 1,
+        "category": "breakfast",
+        "name": "Cheese Omelette",
+        "ingredients": [
+            "eggs",
+            "cheese",
+            "butter",
+            "salt",
+            "pepper"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Whisk eggs, season, pour in pan, add cheese, fold."
+    },
+    {
+        "id": 2,
+        "category": "breakfast",
+        "name": "Pancakes",
+        "ingredients": [
+            "flour",
+            "milk",
+            "egg",
+            "sugar",
+            "butter"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Mix ingredients, fry batter until bubbles form."
+    },
+    {
+        "id": 3,
+        "category": "breakfast",
+        "name": "Avocado Toast",
+        "ingredients": [
+            "bread",
+            "avocado",
+            "salt",
+            "pepper",
+            "lime"
+        ],
+        "cook_time": "7 minutes",
+        "instructions": "Toast bread, mash avocado on top, season."
+    },
+    {
+        "id": 4,
+        "category": "breakfast",
+        "name": "Banana Smoothie",
+        "ingredients": [
+            "banana",
+            "milk",
+            "yogurt"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Blend all ingredients until smooth."
+    },
+    {
+        "id": 5,
+        "category": "breakfast",
+        "name": "Scrambled Eggs",
+        "ingredients": [
+            "eggs",
+            "butter",
+            "salt"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Whisk, cook low heat, stir continuously."
+    },
+    {
+        "id": 6,
+        "category": "breakfast",
+        "name": "French Toast",
+        "ingredients": [
+            "bread",
+            "egg",
+            "milk",
+            "sugar",
+            "cinnamon"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Dip bread in mixture and fry."
+    },
+    {
+        "id": 7,
+        "category": "breakfast",
+        "name": "Yogurt Bowl",
+        "ingredients": [
+            "yogurt",
+            "granola",
+            "berries",
+            "honey"
+        ],
+        "cook_time": "3 minutes",
+        "instructions": "Layer yogurt, granola, and berries."
+    },
+    {
+        "id": 8,
+        "category": "breakfast",
+        "name": "Boiled Eggs",
+        "ingredients": [
+            "eggs",
+            "water"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Boil eggs to desired doneness."
+    },
+    {
+        "id": 9,
+        "category": "breakfast",
+        "name": "Breakfast Burrito",
+        "ingredients": [
+            "tortilla",
+            "egg",
+            "cheese",
+            "sausage"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Cook filling, wrap in tortilla."
+    },
+    {
+        "id": 10,
+        "category": "breakfast",
+        "name": "Oatmeal Bowl",
+        "ingredients": [
+            "oats",
+            "milk",
+            "banana",
+            "honey"
+        ],
+        "cook_time": "7 minutes",
+        "instructions": "Cook oats, add toppings."
+    },
+    {
+        "id": 11,
+        "category": "breakfast",
+        "name": "Breakfast Sandwich",
+        "ingredients": [
+            "bread",
+            "egg",
+            "cheese",
+            "bacon"
+        ],
+        "cook_time": "12 minutes",
+        "instructions": "Cook fillings, assemble sandwich."
+    },
+    {
+        "id": 12,
+        "category": "breakfast",
+        "name": "Blueberry Muffins",
+        "ingredients": [
+            "flour",
+            "eggs",
+            "milk",
+            "blueberries",
+            "sugar"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Mix batter, bake until golden."
+    },
+    {
+        "id": 13,
+        "category": "breakfast",
+        "name": "Bagel with Cream Cheese",
+        "ingredients": [
+            "bagel",
+            "cream cheese"
+        ],
+        "cook_time": "3 minutes",
+        "instructions": "Spread cream cheese on bagel."
+    },
+    {
+        "id": 14,
+        "category": "breakfast",
+        "name": "Fruit Salad",
+        "ingredients": [
+            "apple",
+            "banana",
+            "grape",
+            "orange"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Cut fruits and mix."
+    },
+    {
+        "id": 15,
+        "category": "breakfast",
+        "name": "Egg & Spinach Wrap",
+        "ingredients": [
+            "tortilla",
+            "egg",
+            "spinach"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Cook egg with spinach, wrap in tortilla."
+    },
+    {
+        "id": 16,
+        "category": "breakfast",
+        "name": "Waffles",
+        "ingredients": [
+            "flour",
+            "egg",
+            "milk",
+            "butter"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Cook in waffle iron."
+    },
+    {
+        "id": 17,
+        "category": "breakfast",
+        "name": "Chia Pudding",
+        "ingredients": [
+            "chia seeds",
+            "milk",
+            "honey"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Mix ingredients, refrigerate overnight."
+    },
+    {
+        "id": 18,
+        "category": "breakfast",
+        "name": "Granola Bar",
+        "ingredients": [
+            "oats",
+            "honey",
+            "nuts"
+        ],
+        "cook_time": "0 minutes",
+        "instructions": "Press mixture and chill."
+    },
+    {
+        "id": 19,
+        "category": "breakfast",
+        "name": "Tomato & Basil Toast",
+        "ingredients": [
+            "bread",
+            "tomato",
+            "basil",
+            "olive oil"
+        ],
+        "cook_time": "6 minutes",
+        "instructions": "Toast bread, assemble toppings."
+    },
+    {
+        "id": 20,
+        "category": "breakfast",
+        "name": "Cereal Bowl",
+        "ingredients": [
+            "cereal",
+            "milk"
+        ],
+        "cook_time": "1 minute",
+        "instructions": "Pour cereal and milk."
+    },
+    {
+        "id": 21,
+        "category": "fast_food",
+        "name": "Cheeseburger",
+        "ingredients": [
+            "bun",
+            "beef patty",
+            "cheese",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Grill patty, assemble burger."
+    },
+    {
+        "id": 22,
+        "category": "fast_food",
+        "name": "Fries",
+        "ingredients": [
+            "potatoes",
+            "salt",
+            "oil"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Cut potatoes and fry."
+    },
+    {
+        "id": 23,
+        "category": "fast_food",
+        "name": "Chicken Nuggets",
+        "ingredients": [
+            "chicken",
+            "breadcrumbs",
+            "egg"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Coat chicken and fry."
+    },
+    {
+        "id": 24,
+        "category": "fast_food",
+        "name": "Hot Dog",
+        "ingredients": [
+            "bun",
+            "sausage",
+            "ketchup"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Heat sausage, place in bun."
+    },
+    {
+        "id": 25,
+        "category": "fast_food",
+        "name": "Taco",
+        "ingredients": [
+            "tortilla",
+            "beef",
+            "cheese",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Cook beef, fill tortilla."
+    },
+    {
+        "id": 26,
+        "category": "fast_food",
+        "name": "Pizza Slice",
+        "ingredients": [
+            "pizza dough",
+            "cheese",
+            "tomato sauce"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Bake dough with toppings."
+    },
+    {
+        "id": 27,
+        "category": "fast_food",
+        "name": "Onion Rings",
+        "ingredients": [
+            "onion",
+            "breadcrumbs",
+            "oil"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Bread onion slices and fry."
+    },
+    {
+        "id": 28,
+        "category": "fast_food",
+        "name": "Chicken Sandwich",
+        "ingredients": [
+            "bread",
+            "chicken",
+            "lettuce"
+        ],
+        "cook_time": "12 minutes",
+        "instructions": "Cook chicken, assemble sandwich."
+    },
+    {
+        "id": 29,
+        "category": "fast_food",
+        "name": "Fish & Chips",
+        "ingredients": [
+            "fish",
+            "flour",
+            "potatoes"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Fry battered fish and chips."
+    },
+    {
+        "id": 30,
+        "category": "fast_food",
+        "name": "BBQ Wings",
+        "ingredients": [
+            "chicken wings",
+            "bbq sauce"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Bake wings and coat in sauce."
+    },
+    {
+        "id": 31,
+        "category": "fast_food",
+        "name": "Veggie Burger",
+        "ingredients": [
+            "bun",
+            "veggie patty",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Cook patty, assemble burger."
+    },
+    {
+        "id": 32,
+        "category": "fast_food",
+        "name": "Nachos",
+        "ingredients": [
+            "tortilla chips",
+            "cheese"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Add cheese and heat until melted."
+    },
+    {
+        "id": 33,
+        "category": "fast_food",
+        "name": "Chicken Wrap",
+        "ingredients": [
+            "tortilla",
+            "chicken",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Fill tortilla and wrap."
+    },
+    {
+        "id": 34,
+        "category": "fast_food",
+        "name": "Corn Dog",
+        "ingredients": [
+            "sausage",
+            "corn batter"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Dip sausage and fry."
+    },
+    {
+        "id": 35,
+        "category": "fast_food",
+        "name": "Soft Pretzel",
+        "ingredients": [
+            "flour",
+            "salt",
+            "butter"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Bake dough into pretzel shape."
+    },
+    {
+        "id": 36,
+        "category": "fast_food",
+        "name": "Grilled Cheese",
+        "ingredients": [
+            "bread",
+            "cheese",
+            "butter"
+        ],
+        "cook_time": "8 minutes",
+        "instructions": "Grill sandwich until melted."
+    },
+    {
+        "id": 37,
+        "category": "fast_food",
+        "name": "Popcorn Chicken",
+        "ingredients": [
+            "chicken",
+            "flour",
+            "oil"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Bread chicken bites and fry."
+    },
+    {
+        "id": 38,
+        "category": "fast_food",
+        "name": "Quesadilla",
+        "ingredients": [
+            "tortilla",
+            "cheese"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Heat tortilla with cheese folded inside."
+    },
+    {
+        "id": 39,
+        "category": "fast_food",
+        "name": "Meatball Sub",
+        "ingredients": [
+            "bread",
+            "meatballs",
+            "cheese"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Assemble sub and bake."
+    },
+    {
+        "id": 40,
+        "category": "fast_food",
+        "name": "Fried Chicken",
+        "ingredients": [
+            "chicken",
+            "flour",
+            "oil"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Batter chicken and deep fry."
+    },
+    {
+        "id": 41,
+        "category": "healthy",
+        "name": "Grilled Chicken Salad",
+        "ingredients": [
+            "chicken",
+            "lettuce",
+            "tomato",
+            "olive oil"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Grill chicken and toss in salad."
+    },
+    {
+        "id": 42,
+        "category": "healthy",
+        "name": "Quinoa Bowl",
+        "ingredients": [
+            "quinoa",
+            "tomato",
+            "cucumber"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Cook quinoa and add vegetables."
+    },
+    {
+        "id": 43,
+        "category": "healthy",
+        "name": "Veggie Stir-Fry",
+        "ingredients": [
+            "broccoli",
+            "carrot",
+            "soy sauce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Stir-fry vegetables in sauce."
+    },
+    {
+        "id": 44,
+        "category": "healthy",
+        "name": "Salmon & Veggies",
+        "ingredients": [
+            "salmon",
+            "broccoli",
+            "lemon"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Bake salmon and steamed veggies."
+    },
+    {
+        "id": 45,
+        "category": "healthy",
+        "name": "Greek Salad",
+        "ingredients": [
+            "lettuce",
+            "tomato",
+            "feta"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Chop and mix ingredients."
+    },
+    {
+        "id": 46,
+        "category": "healthy",
+        "name": "Smoothie Bowl",
+        "ingredients": [
+            "berries",
+            "banana",
+            "yogurt"
+        ],
+        "cook_time": "7 minutes",
+        "instructions": "Blend and add toppings."
+    },
+    {
+        "id": 47,
+        "category": "healthy",
+        "name": "Stuffed Peppers",
+        "ingredients": [
+            "bell pepper",
+            "rice",
+            "vegetables"
+        ],
+        "cook_time": "30 minutes",
+        "instructions": "Bake filled peppers."
+    },
+    {
+        "id": 48,
+        "category": "healthy",
+        "name": "Chicken Lettuce Wraps",
+        "ingredients": [
+            "chicken",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Cook chicken and wrap."
+    },
+    {
+        "id": 49,
+        "category": "healthy",
+        "name": "Zucchini Pasta",
+        "ingredients": [
+            "zucchini",
+            "tomato sauce"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Spiralize and heat."
+    },
+    {
+        "id": 50,
+        "category": "healthy",
+        "name": "Brown Rice Bowl",
+        "ingredients": [
+            "brown rice",
+            "chicken",
+            "vegetables"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Cook rice and add toppings."
+    },
+    {
+        "id": 51,
+        "category": "healthy",
+        "name": "Tuna Salad",
+        "ingredients": [
+            "tuna",
+            "lettuce",
+            "olive oil"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Mix tuna and vegetables."
+    },
+    {
+        "id": 52,
+        "category": "healthy",
+        "name": "Veggie Soup",
+        "ingredients": [
+            "carrot",
+            "celery",
+            "broth"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Boil vegetables in broth."
+    },
+    {
+        "id": 53,
+        "category": "healthy",
+        "name": "Grilled Fish",
+        "ingredients": [
+            "white fish",
+            "lemon"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Grill fish with lemon."
+    },
+    {
+        "id": 54,
+        "category": "healthy",
+        "name": "Chickpea Salad",
+        "ingredients": [
+            "chickpeas",
+            "tomato",
+            "onion"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Mix all ingredients."
+    },
+    {
+        "id": 55,
+        "category": "healthy",
+        "name": "Cucumber Sandwich",
+        "ingredients": [
+            "bread",
+            "cucumber",
+            "cream cheese"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Assemble sandwich."
+    },
+    {
+        "id": 56,
+        "category": "healthy",
+        "name": "Fruit & Nut Mix",
+        "ingredients": [
+            "nuts",
+            "raisins",
+            "cranberries"
+        ],
+        "cook_time": "1 minute",
+        "instructions": "Mix together."
+    },
+    {
+        "id": 57,
+        "category": "healthy",
+        "name": "Turkey Wrap",
+        "ingredients": [
+            "tortilla",
+            "turkey",
+            "lettuce"
+        ],
+        "cook_time": "7 minutes",
+        "instructions": "Wrap turkey and lettuce."
+    },
+    {
+        "id": 58,
+        "category": "healthy",
+        "name": "Tofu Stir-Fry",
+        "ingredients": [
+            "tofu",
+            "broccoli",
+            "soy sauce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Stir-fry tofu and veg."
+    },
+    {
+        "id": 59,
+        "category": "healthy",
+        "name": "Apple & Peanut Butter",
+        "ingredients": [
+            "apple",
+            "peanut butter"
+        ],
+        "cook_time": "1 minute",
+        "instructions": "Slice apple and spread peanut butter."
+    },
+    {
+        "id": 60,
+        "category": "healthy",
+        "name": "Shrimp & Avocado Salad",
+        "ingredients": [
+            "shrimp",
+            "avocado"
+        ],
+        "cook_time": "12 minutes",
+        "instructions": "Cook shrimp and toss with avocado."
+    },
+    {
+        "id": 61,
+        "category": "vegetarian",
+        "name": "Veggie Pasta",
+        "ingredients": [
+            "pasta",
+            "tomato",
+            "zucchini"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Cook pasta, mix with veggies."
+    },
+    {
+        "id": 62,
+        "category": "vegetarian",
+        "name": "Caprese Salad",
+        "ingredients": [
+            "mozzarella",
+            "tomato",
+            "basil"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Assemble and drizzle with olive oil."
+    },
+    {
+        "id": 63,
+        "category": "vegetarian",
+        "name": "Veggie Burger",
+        "ingredients": [
+            "veggie patty",
+            "bun",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Cook patty and assemble."
+    },
+    {
+        "id": 64,
+        "category": "vegetarian",
+        "name": "Sweet Potato Fries",
+        "ingredients": [
+            "sweet potato",
+            "oil",
+            "salt"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Slice and bake."
+    },
+    {
+        "id": 65,
+        "category": "vegetarian",
+        "name": "Bean Burrito",
+        "ingredients": [
+            "tortilla",
+            "beans",
+            "cheese"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Wrap heated ingredients."
+    },
+    {
+        "id": 66,
+        "category": "vegetarian",
+        "name": "Margherita Pizza",
+        "ingredients": [
+            "pizza dough",
+            "cheese",
+            "tomato"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Bake with toppings."
+    },
+    {
+        "id": 67,
+        "category": "vegetarian",
+        "name": "Falafel Wrap",
+        "ingredients": [
+            "falafel",
+            "tortilla",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Fill wrap with falafel."
+    },
+    {
+        "id": 68,
+        "category": "vegetarian",
+        "name": "Bruschetta",
+        "ingredients": [
+            "bread",
+            "tomato",
+            "basil"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Toast and top with mixture."
+    },
+    {
+        "id": 69,
+        "category": "vegetarian",
+        "name": "Veggie Soup",
+        "ingredients": [
+            "carrot",
+            "potato",
+            "broth"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Boil vegetables."
+    },
+    {
+        "id": 70,
+        "category": "vegetarian",
+        "name": "Veggie Quesadilla",
+        "ingredients": [
+            "tortilla",
+            "cheese",
+            "bell pepper"
+        ],
+        "cook_time": "12 minutes",
+        "instructions": "Heat filled tortilla."
+    },
+    {
+        "id": 71,
+        "category": "vegetarian",
+        "name": "Pasta Primavera",
+        "ingredients": [
+            "pasta",
+            "broccoli",
+            "carrot"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Cook pasta with added vegetables."
+    },
+    {
+        "id": 72,
+        "category": "vegetarian",
+        "name": "Veggie Sushi Roll",
+        "ingredients": [
+            "rice",
+            "seaweed",
+            "cucumber"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Roll rice and veggies."
+    },
+    {
+        "id": 73,
+        "category": "vegetarian",
+        "name": "Vegetarian Tacos",
+        "ingredients": [
+            "tortilla",
+            "beans",
+            "lettuce"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Assemble tacos with toppings."
+    },
+    {
+        "id": 74,
+        "category": "vegetarian",
+        "name": "Spinach & Ricotta Pasta",
+        "ingredients": [
+            "pasta",
+            "spinach",
+            "ricotta"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Mix cooked pasta with sauce."
+    },
+    {
+        "id": 75,
+        "category": "vegetarian",
+        "name": "Veggie Curry",
+        "ingredients": [
+            "potato",
+            "carrot",
+            "curry sauce"
+        ],
+        "cook_time": "25 minutes",
+        "instructions": "Simmer vegetables in curry."
+    },
+    {
+        "id": 76,
+        "category": "vegetarian",
+        "name": "Tofu Bowl",
+        "ingredients": [
+            "tofu",
+            "rice",
+            "broccoli"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Cook tofu and serve over rice."
+    },
+    {
+        "id": 77,
+        "category": "vegetarian",
+        "name": "Veggie Pizza Bagel",
+        "ingredients": [
+            "bagel",
+            "tomato sauce",
+            "cheese"
+        ],
+        "cook_time": "12 minutes",
+        "instructions": "Bake topped bagel."
+    },
+    {
+        "id": 78,
+        "category": "vegetarian",
+        "name": "Pesto Pasta",
+        "ingredients": [
+            "pasta",
+            "pesto"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Stir pesto into pasta."
+    },
+    {
+        "id": 79,
+        "category": "vegetarian",
+        "name": "Hummus Plate",
+        "ingredients": [
+            "hummus",
+            "carrot",
+            "pita"
+        ],
+        "cook_time": "5 minutes",
+        "instructions": "Serve hummus with veggies."
+    },
+    {
+        "id": 80,
+        "category": "vegetarian",
+        "name": "Roasted Veggie Bowl",
+        "ingredients": [
+            "carrot",
+            "zucchini",
+            "olive oil"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Roast vegetables and serve."
+    }
+]

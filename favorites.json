@@ -1,0 +1,13 @@
+[
+    {
+        "id": 34,
+        "category": "fast_food",
+        "name": "Corn Dog",
+        "ingredients": [
+            "sausage",
+            "corn batter"
+        ],
+        "cook_time": "15 minutes",
+        "instructions": "Dip sausage and fry."
+    }
+]

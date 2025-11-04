@@ -1,0 +1,15 @@
+[
+    {
+        "id": 81,
+        "category": "breakfast",
+        "name": "Cereals with milk",
+        "ingredients": [
+            "Cereals",
+            "Milk"
+        ],
+        "cook_time": "5 min",
+        "instructions": "Mix Cereals with milk in a bowl.",
+        "created_by": "user",
+        "created_date": "2025-10-31"
+    }
+]
