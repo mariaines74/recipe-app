@@ -238,9 +238,9 @@ def auth_gate() -> bool:
     inject_custom_css()
 
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        <div style="background: white;
                     border-radius: 15px; padding: 2rem; margin: 2rem 0; color: white;">
-            <h1 style="margin: 0; font-size: 2.5rem;">🔐 Welcome to Recipe App</h1>
+            <h1 style="margin: 0; font-size: 2.5rem;"> Welcome to Recipe App</h1>
             <p style="margin-top: 0.5rem;">Log in or create an account to continue</p>
         </div>
     """, unsafe_allow_html=True)
