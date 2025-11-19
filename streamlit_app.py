@@ -4,6 +4,9 @@ from datetime import datetime
 from typing import List, Dict, Any
 
 import streamlit as st
+import re
+import hashlib
+import secrets
 
 
 # ---------- Custom CSS ----------
@@ -200,6 +203,126 @@ def save_json(file_path: str, data: Any) -> None:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
 
+# ---------- Auth & per-user helpers ----------
+USERS_FILE = "users.json"
+
+def load_users() -> Dict[str, Any]:
+    data = load_json(USERS_FILE, {})
+    return data if isinstance(data, dict) else {}
+
+def save_users(data: Dict[str, Any]) -> None:
+    save_json(USERS_FILE, data)
+
+def hash_password(pw: str, salt: str) -> str:
+    return hashlib.sha256((pw + salt).encode("utf-8")).hexdigest()
+
+def validate_email(email: str) -> bool:
+    return bool(re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email))
+
+def email_to_safe_id(email: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", email.strip().lower())
+
+def user_file_paths(email: str) -> Dict[str, str]:
+    safe = email_to_safe_id(email)
+    return {
+        "favorites": f"favorites_{safe}.json",
+        "user_recipes": f"user_recipes_{safe}.json",
+    }
+
+def auth_gate() -> bool:
+    # If already signed in, allow app to proceed
+    if st.session_state.get("user"):
+        return True
+
+    st.set_page_config(page_title="Recipe App", page_icon="🍳", layout="wide")
+    inject_custom_css()
+
+    st.markdown("""
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    border-radius: 15px; padding: 2rem; margin: 2rem 0; color: white;">
+            <h1 style="margin: 0; font-size: 2.5rem;">🔐 Welcome to Recipe App</h1>
+            <p style="margin-top: 0.5rem;">Log in or create an account to continue</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+    tabs = st.tabs(["Login", "Create account"])
+
+    # Login tab
+    with tabs[0]:
+        with st.form("login_form", clear_on_submit=False):
+            email = st.text_input("Email")
+            password = st.text_input("Password", type="password")
+            submitted_login = st.form_submit_button("Login", type="primary", use_container_width=True)
+
+        if submitted_login:
+            users = load_users()
+            u = users.get(email.strip().lower())
+            if not u:
+                st.error("Account not found.")
+            else:
+                salt = u.get("salt", "")
+                if hash_password(password, salt) == u.get("password_hash"):
+                    st.session_state.user = {"name": u.get("name"), "email": u.get("email")}
+                    st.session_state.paths = user_file_paths(u["email"])
+                    if "user_recipes" not in st.session_state:
+                        st.session_state.user_recipes = load_json(st.session_state.paths["user_recipes"], [])
+                    if "favorites" not in st.session_state:
+                        st.session_state.favorites = load_json(st.session_state.paths["favorites"], [])
+                    st.rerun()
+                else:
+                    st.error("Invalid password.")
+
+    # Create account tab
+    with tabs[1]:
+        with st.form("register_form", clear_on_submit=False):
+            name = st.text_input("Name")
+            email = st.text_input("Email")
+            password = st.text_input("Password", type="password", help="Minimum 6 characters recommended")
+            submitted_register = st.form_submit_button("Create account", type="primary", use_container_width=True)
+
+        if submitted_register:
+            if not name.strip():
+                st.error("Please provide your name.")
+            elif not validate_email(email):
+                st.error("Please provide a valid email address.")
+            elif len(password) < 6:
+                st.error("Password must be at least 6 characters.")
+            else:
+                users = load_users()
+                key = email.strip().lower()
+                if key in users:
+                    st.error("An account with this email already exists.")
+                else:
+                    salt = secrets.token_hex(16)
+                    users[key] = {
+                        "name": name.strip(),
+                        "email": key,
+                        "password_hash": hash_password(password, salt),
+                        "salt": salt,
+                        "created_at": datetime.now().isoformat(timespec="seconds"),
+                    }
+                    save_users(users)
+                    # Auto-login after successful registration
+                    st.session_state.user = {"name": name.strip(), "email": key}
+                    st.session_state.paths = user_file_paths(key)
+                    st.session_state.user_recipes = load_json(st.session_state.paths["user_recipes"], [])
+                    st.session_state.favorites = load_json(st.session_state.paths["favorites"], [])
+                    st.success("Account created! Logging you in...")
+                    st.rerun()
+
+    # Block the rest of the app until user logs in
+    return False
+
+def logout() -> None:
+    # Clear user-specific session data and return to login
+    for k in [
+        "user", "paths", "favorites", "user_recipes",
+        "rand_recipe", "rand_recipe_cat", "rand_recipes_multi"
+    ]:
+        if k in st.session_state:
+            st.session_state.pop(k)
+    st.rerun()
+
 # ---------- Initialization ----------
 def initialize_state() -> None:
     if "recipes" not in st.session_state:
@@ -209,6 +332,16 @@ def initialize_state() -> None:
     if "favorites" not in st.session_state:
         st.session_state.favorites = load_json("favorites.json", [])
 
+
+def initialize_state_for_user() -> None:
+    if "recipes" not in st.session_state:
+        st.session_state.recipes = load_json("recipes.json", [])
+    # For logged-in users, ensure per-user files are loaded
+    if "user" in st.session_state and "paths" in st.session_state:
+        if "user_recipes" not in st.session_state:
+            st.session_state.user_recipes = load_json(st.session_state.paths["user_recipes"], [])
+        if "favorites" not in st.session_state:
+            st.session_state.favorites = load_json(st.session_state.paths["favorites"], [])
 
 def get_all_recipes() -> List[Dict[str, Any]]:
     return list(st.session_state.recipes) + list(st.session_state.user_recipes)
@@ -225,12 +358,14 @@ def in_favorites(recipe: Dict[str, Any]) -> bool:
 def add_to_favorites(recipe: Dict[str, Any]) -> None:
     if not in_favorites(recipe):
         st.session_state.favorites.append(recipe)
-        save_json("favorites.json", st.session_state.favorites)
+        path = st.session_state.paths["favorites"] if "paths" in st.session_state else "favorites.json"
+        save_json(path, st.session_state.favorites)
 
 
 def remove_from_favorites(recipe: Dict[str, Any]) -> None:
     st.session_state.favorites = [r for r in st.session_state.favorites if not is_same_recipe(r, recipe)]
-    save_json("favorites.json", st.session_state.favorites)
+    path = st.session_state.paths["favorites"] if "paths" in st.session_state else "favorites.json"
+    save_json(path, st.session_state.favorites)
 
 
 # ---------- UI helpers ----------
@@ -310,17 +445,16 @@ def recipe_card(recipe: Dict[str, Any]) -> None:
 def page_home() -> None:
     all_recipes = get_all_recipes()
     
-    # Header with gradient
+    # Header with simple design (matching sidebar total recipes box)
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    border-radius: 15px;
-                    padding: 2rem;
-                    margin-bottom: 2rem;
-                    text-align: center;
-                    color: white;">
-            <h1 style="color: white; margin: 0; font-size: 3rem;">🍳 Recipe App</h1>
-            <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-top: 0.5rem;">
-                Browse, search, and save your favorite recipes
+        <div style="background: #f8fafc;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    margin-bottom: 0.5rem;
+                    text-align: center;">
+            <h1 style="margin: 0; font-size: 2.5rem; color: #111827;"> Recipe App</h1>
+            <p style="font-size: 1rem; margin-top: 0.5rem; color: #374151;">
+                All Recipes, search, and save your favorite recipes
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -388,12 +522,12 @@ def page_random() -> None:
     import random
 
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
                     color: white;">
-            <h1 style="color: white; margin: 0; font-size: 2.5rem;">🎲 Random Recipe Generator</h1>
+            <h1 style="color: white; margin: 0; font-size: 2.5rem;"> Random Recipe Generator</h1>
         </div>
     """, unsafe_allow_html=True)
     
@@ -446,14 +580,14 @@ def page_random() -> None:
                     recipe_card(r)
 
 
-def page_browse() -> None:
+def page_All_Recipes() -> None:
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
                     color: white;">
-            <h1 style="color: white; margin: 0; font-size: 2.5rem;">📚 Browse by Category</h1>
+            <h1 style="color: white; margin: 0; font-size: 2.5rem;"> All Recipes by Category</h1>
         </div>
     """, unsafe_allow_html=True)
     
@@ -487,12 +621,12 @@ def page_browse() -> None:
 
 def page_search() -> None:
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
                     color: white;">
-            <h1 style="color: white; margin: 0; font-size: 2.5rem;">🔍 Search by Ingredients</h1>
+            <h1 style="color: white; margin: 0; font-size: 2.5rem;"> Search by Ingredients</h1>
         </div>
     """, unsafe_allow_html=True)
     
@@ -602,7 +736,7 @@ def page_search() -> None:
 
 def page_favorites() -> None:
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
@@ -632,7 +766,7 @@ def page_favorites() -> None:
 
 def page_add_recipe() -> None:
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
@@ -682,18 +816,18 @@ def page_add_recipe() -> None:
         }
 
         st.session_state.user_recipes.append(new_recipe)
-        save_json("user_recipes.json", st.session_state.user_recipes)
+        save_json(st.session_state.paths["user_recipes"], st.session_state.user_recipes)
         st.success(f"Recipe '{name}' added!")
 
 
 def page_my_recipes() -> None:
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
                     color: white;">
-            <h1 style="color: white; margin: 0; font-size: 2.5rem;">📝 My Added Recipes</h1>
+            <h1 style="color: white; margin: 0; font-size: 2.5rem;"> My Added Recipes</h1>
         </div>
     """, unsafe_allow_html=True)
     
@@ -740,24 +874,24 @@ def page_my_recipes() -> None:
                 if ings:
                     recipe["ingredients"] = ings
                 recipe["instructions"] = new_instructions.strip() or recipe["instructions"]
-                save_json("user_recipes.json", st.session_state.user_recipes)
+                save_json(st.session_state.paths["user_recipes"], st.session_state.user_recipes)
                 st.success("✅ Recipe updated successfully!")
 
             if del_btn:
                 st.session_state.user_recipes.pop(idx)
-                save_json("user_recipes.json", st.session_state.user_recipes)
+                save_json(st.session_state.paths["user_recipes"], st.session_state.user_recipes)
                 st.toast("🗑️ Recipe deleted", icon="🗑️")
                 st.rerun()
 
 
 def page_about() -> None:
     st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        <div style="background: white;
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin-bottom: 2rem;
                     color: white;">
-            <h1 style="color: white; margin: 0; font-size: 2.5rem;">ℹ️ About</h1>
+            <h1 style="color: white; margin: 0; font-size: 2.5rem;"> About Us</h1>
         </div>
     """, unsafe_allow_html=True)
     
@@ -766,48 +900,45 @@ def page_about() -> None:
                     border-radius: 15px;
                     padding: 2rem;
                     border-left: 5px solid #667eea;">
-            <h2>📚 Recipe App</h2>
+            <h2>🍳 Our Story</h2>
             <p style="font-size: 1.1rem; line-height: 1.8;">
-                This app uses a local JSON database. Generate <code>recipes.json</code> by running <code>database_app.ipynb</code>.
+                It all started with a simple idea — to make cooking fun, easy, and accessible for everyone. 
+                Our small team of food enthusiasts and developers wanted to bring together the joy of home-cooked 
+                meals with the convenience of modern technology. From our humble beginnings experimenting in a 
+                family kitchen to creating this digital recipe hub, our mission has always been the same: 
+                to help people discover new flavors, share their creations, and fall in love with cooking again.
             </p>
-            <h3>💾 Data Storage</h3>
-            <ul style="font-size: 1rem; line-height: 2;">
-                <li><strong>recipes.json</strong> - Main recipe database</li>
-                <li><strong>favorites.json</strong> - Your favorite recipes</li>
-                <li><strong>user_recipes.json</strong> - Recipes you've added</li>
-            </ul>
-            <h3>✨ Features</h3>
-            <ul style="font-size: 1rem; line-height: 2;">
-                <li>🎲 Random recipe generator</li>
-                <li>📚 Browse recipes by category</li>
-                <li>🔍 Search by ingredients</li>
-                <li>❤️ Favorites system</li>
-                <li>➕ Add your own recipes</li>
-                <li>✏️ Edit and manage recipes</li>
-            </ul>
         </div>
     """, unsafe_allow_html=True)
 
 
 # ---------- App ----------
 def main() -> None:
-    st.set_page_config(page_title="Recipe App", page_icon="🍳", layout="wide")
+    # Show login/register first; stop rendering if not signed in
+    if not auth_gate():
+        return
+
+    # Signed in; apply CSS and init per-user state
     inject_custom_css()
-    initialize_state()
+    initialize_state_for_user()
 
     with st.sidebar:
         st.markdown("""
             <div style="text-align: center; padding: 1rem 0;">
-                <h1 style="color: #667eea; margin: 0;">🍳 Recipe App</h1>
+                <h1 style="color: #667eea; margin: 0;"> Recipe App</h1>
             </div>
         """, unsafe_allow_html=True)
         
         st.markdown("---")
+        if st.session_state.get("user"):
+            st.markdown(f"**Signed in as:** {st.session_state.user.get('name','')} ({st.session_state.user.get('email','')})")
+            if st.button("Log out", use_container_width=True):
+                logout()
         
         st.markdown("### 🧭 Navigation")
         page = st.radio(
             "Navigate",
-            ["Home", "Random", "Browse", "Search", "Favorites", "Add Recipe", "My Recipes", "About"],
+            ["Home", "Random", "All Recipes", "Search", "Favorites", "Add Recipe", "My Recipes", "About"],
             index=0,
             label_visibility="collapsed"
         )
@@ -835,8 +966,8 @@ def main() -> None:
         page_home()
     elif page == "Random":
         page_random()
-    elif page == "Browse":
-        page_browse()
+    elif page == "All Recipes":
+        page_All_Recipes()
     elif page == "Search":
         page_search()
     elif page == "Favorites":
@@ -851,5 +982,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+
 
 

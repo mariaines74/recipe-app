@@ -1,0 +1,9 @@
+{
+    "marianapplopes@hotmail.com": {
+        "name": "Mariana",
+        "email": "marianapplopes@hotmail.com",
+        "password_hash": "d5cdf41f95b637632e5df0f6dc6cf9f1161f5aa838b0c27ebc8db74b33c2a3e9",
+        "salt": "df6c3d22ec5a76e589b537a648aef259",
+        "created_at": "2025-11-06T11:02:32"
+    }
+}

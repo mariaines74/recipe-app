@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "category": "breakfast",
+        "name": "Cheese Omelette",
+        "ingredients": [
+            "eggs",
+            "cheese",
+            "butter",
+            "salt",
+            "pepper"
+        ],
+        "cook_time": "10 minutes",
+        "instructions": "Whisk eggs, season, pour in pan, add cheese, fold."
+    },
+    {
+        "id": 2,
+        "category": "breakfast",
+        "name": "Pancakes",
+        "ingredients": [
+            "flour",
+            "milk",
+            "egg",
+            "sugar",
+            "butter"
+        ],
+        "cook_time": "20 minutes",
+        "instructions": "Mix ingredients, fry batter until bubbles form."
+    }
+]
